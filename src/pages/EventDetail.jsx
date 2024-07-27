@@ -1,19 +1,24 @@
+import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
+
 import { getRetreat } from "../api/index";
+
 import Spinner from "../components/primitives/Spinner";
+import Button from "../components/primitives/Button";
+import Badge from "../components/primitives/Badge";
+
+import InfoCard from "../components/InfoCard";
 import CalenderIcon from "../assets/calender.svg";
 import LocationIcon from "../assets/location-bg.svg";
 import TimerIcon from "../assets/timer.svg";
 import BackIcon from "../assets/back.svg";
 import YogaImage from "../assets/yoga.svg";
+import FallbackImage from "../assets/event-card-fallback.jpg";
+
 import { capitalize } from "../utils/capitalize";
 import { getDate } from "../utils/get-date";
-import InfoCard from "../components/InfoCard";
-import Button from "../components/primitives/Button";
-import Badge from "../components/primitives/Badge";
-import { motion } from "framer-motion";
-
+import { isValidURL } from "../utils/check-url";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -61,6 +66,7 @@ export default function EventDetail() {
     .split(" ")
     .slice(1)
     .join(" ");
+  const imageSrc = isValidURL(data.image) ? data.image : FallbackImage;
   return (
     <motion.section className="container mx-auto min-h-[100dvh] bg-[#EDE9FF] lg:grid lg:grid-cols-[3fr_2fr] lg:place-items-center lg:gap-10 lg:p-10">
       <motion.div
@@ -70,7 +76,7 @@ export default function EventDetail() {
         transition={{ duration: 0.5 }}
       >
         <img
-          src={data.image}
+          src={imageSrc}
           alt=""
           className="w-full h-[250px] object-cover object-center backdrop-blur-sm lg:h-full lg:rounded-lg lg:hover:scale-105 lg:transition-[300ms_ease_transform]"
         />

@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 
 import LocationLogo from "../assets/location.svg";
 import DateLogo from "../assets/date.svg";
+import FallbackImage from "../assets/event-card-fallback.jpg";
 
 import { getDate } from "../utils/get-date";
 import { capitalize } from "../utils/capitalize";
+import { isValidURL } from "../utils/check-url";
 
 export default function EventCard({ item, variants }) {
   // console.log("Hi I'm re-rendering");
@@ -14,6 +16,8 @@ export default function EventCard({ item, variants }) {
     .split(" ")
     .slice(1)
     .join(" ");
+  
+  const imageSrc = isValidURL(item.image) ? item.image : FallbackImage
 
   return (
     <motion.div
@@ -23,7 +27,7 @@ export default function EventCard({ item, variants }) {
       key={item}
     >
       <img
-        src={item.image}
+        src={imageSrc}
         alt=""
         className="w-full h-[200px] object-cover object-center rounded-md hover:scale-105 transition-[300ms_ease_transform] lg:h-[300px]"
       />
