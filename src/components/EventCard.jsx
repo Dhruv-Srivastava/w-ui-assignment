@@ -9,6 +9,8 @@ import { getDate } from "../utils/get-date";
 import { capitalize } from "../utils/capitalize";
 import { isValidURL } from "../utils/check-url";
 
+import Badge from "./primitives/Badge";
+
 export default function EventCard({ item, variants }) {
   // console.log("Hi I'm re-rendering");
   const navigate = useNavigate();
@@ -16,8 +18,8 @@ export default function EventCard({ item, variants }) {
     .split(" ")
     .slice(1)
     .join(" ");
-  
-  const imageSrc = isValidURL(item.image) ? item.image : FallbackImage
+
+  const imageSrc = isValidURL(item.image) ? item.image : FallbackImage;
 
   return (
     <motion.div
@@ -47,6 +49,16 @@ export default function EventCard({ item, variants }) {
           <p className="text-[0.625rem] font-normal">Starts from</p>
           <p className="text-xl font-semibold">&#8377;{item.price}</p>
         </div>
+      </div>
+      <div className="font-medium absolute text-[10px] right-2 top-2 lg:right-3 lg:top-4 lg:text-sm">
+        <Badge
+          style={{
+            color: "black",
+            background: item.type === "Standalone" ? "#77DD61" : "#FFBF00",
+          }}
+        >
+          {item.type}
+        </Badge>
       </div>
     </motion.div>
   );
