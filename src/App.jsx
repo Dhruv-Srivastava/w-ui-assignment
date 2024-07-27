@@ -1,12 +1,19 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
+
 import Home from "./pages/Home";
+import EventDetail from "./pages/EventDetail";
+import { SearchParamsContext } from "./context/SearchParams";
+import PageNotFound from "./pages/404";
 
 export default function App() {
+  const [params, setParams] = useSearchParams({ page: 1, limit: 3 });
   return (
-    <>
-     <Routes>
-        <Route path="/" element={<Home />}/> 
-      </Routes> 
-    </>
-  )
+    <SearchParamsContext.Provider value={[params, setParams]}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<EventDetail />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </SearchParamsContext.Provider>
+  );
 }
