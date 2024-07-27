@@ -44,8 +44,8 @@ export default function InputContainer({ style }) {
       <img src={SearchIcon} alt="" className="" />
       <input
         type="text"
-        placeholder="Search retreat.."
-        className="w-full flex-1 outline-none bg-transparent"
+        placeholder="Search retreat by tag, location, title, type or anything.."
+        className="w-full flex-1 outline-none bg-transparent text-ellipsis placeholder:text-[10px] lg:placeholder:text-base"
         value={inputValue}
         onChange={handleChange}
       />
@@ -63,7 +63,7 @@ export default function InputContainer({ style }) {
               return prev;
             });
           }}
-          className="flex items-center gap-2 bg-[#F0635A] rounded-3xl p-2 pr-3 text-white cursor-pointer text-center"
+          className="flex items-center gap-2 bg-[#F0635A] rounded-3xl p-2 pr-3 text-white cursor-pointer text-center transition-[300ms_ease_transform] active:scale-95"
         >
           <img src={TrashIcon} alt="" className="" />
         </button>

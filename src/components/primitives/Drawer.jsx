@@ -17,7 +17,7 @@ export default function Drawer() {
     <div className="grid place-content-center">
       <button
         onClick={() => setOpen(true)}
-        className="flex gap-2 bg-[#5D56F3] rounded-3xl p-2 pr-3 text-white cursor-pointer"
+        className="flex gap-2 bg-[#5D56F3] rounded-3xl p-2 pr-3 text-white cursor-pointer transition-[300ms_ease_transform] active:scale-95"
       >
         <img src={FilterIcon} alt="" className="" />
         <span className="font-light text-sm">Filters</span>

@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import InputContainer from "../components/InputContainer";
 import EventContainer from "../components/EventContainer";
+import Footer from "../components/Footer";
 
 import Button from "../components/primitives/Button";
 
@@ -52,6 +53,7 @@ export default function Home() {
           Next
         </Button>
       </div>
+      <Footer />
     </main>
   );
 }

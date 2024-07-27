@@ -80,13 +80,13 @@ export default function EventDetail() {
           alt=""
           className="w-full h-[250px] object-cover object-center backdrop-blur-sm lg:h-full lg:rounded-lg lg:hover:scale-105 lg:transition-[300ms_ease_transform]"
         />
-        <div className="flex justify-center items-center gap-4 shadow-lg w-[80%] h-16 p-3 rounded-full bg-white backdrop-blur-lg absolute inset-0 -bottom-60 m-auto z-10 lg:hidden">
+        <div className="flex justify-center items-center gap-4 shadow-lg w-[80%] h-16 p-3 rounded-full text-sm bg-white backdrop-blur-lg absolute inset-0 -bottom-60 m-auto z-10 lg:hidden">
           <Badge style={{ background: "#F0635A" }}>{data.tag[0]}</Badge>
           <Badge style={{ background: "#F59762" }}>{data.tag[1]}</Badge>
         </div>
       </motion.div>
 
-      <motion.div className="px-6 pt-12">
+      <motion.div className="px-6 pt-12 w-full">
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
