@@ -1,31 +1,57 @@
-import { useQuery } from "@tanstack/react-query";
-import EventCard from "../components/EventCard";
+import { useContext } from "react";
 
-async function getAllRetreats() {
-  const res = await fetch(
-    "https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats/"
-  );
-  const data = await res.json();
-  return data;
-}
+import { SearchParamsContext } from "../context/SearchParams";
+
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import InputContainer from "../components/InputContainer";
+import EventContainer from "../components/EventContainer";
+
+import Button from "../components/primitives/Button";
 
 export default function Home() {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["retreats"],
-    queryFn: getAllRetreats,
-  });
+  const [params, setParams] = useContext(SearchParamsContext);
+  const page = +params.get("page") || 1;
+  const limit = +params.get("limit") || 3;
+  const search = params.get("search") || "";
+  const location = params.get("location") || "";
+  const type = params.get("type") || "";
 
-  console.log(data);
+  function increasePage() {
+    setParams((prev) => {
+      prev.set("page", page + 1);
+      return prev;
+    });
+  }
 
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (isError) return <h1>{error.message}</h1>;
+  function decreasePage() {
+    setParams((prev) => {
+      if (page === 1) return prev;
+      prev.set("page", page - 1);
+      return prev;
+    });
+  }
 
   return (
-    <main className="flex flex-col items-center gap-3">
-      {data?.map((retreat) => (
-        <EventCard key={retreat.id} item={retreat} />
-      ))}
+    <main className="bg-white w-full flex flex-col items-center gap-3">
+      <Navbar />
+      <Hero />
+      <div className="hidden lg:block lg:container lg:px-5 lg:mt-5">
+        <InputContainer style={{ border: "2px solid gray" }} />
+      </div>
+      <EventContainer options={{ page, limit, search, location, type }} />
+      <div className="flex gap-5 my-5 lg:my-2">
+        <Button
+          variant="previous"
+          style={{ cursor: page === 1 ? "not-allowed" : "pointer" }}
+          onClick={decreasePage}
+        >
+          Previous
+        </Button>
+        <Button variant="next" onClick={increasePage}>
+          Next
+        </Button>
+      </div>
     </main>
   );
 }
